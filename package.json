@@ -1,0 +1,12 @@
+{
+  "name": "gednius-proxy",
+  "version": "1.0.0",
+  "description": "GEDnius API proxy server — keeps your Anthropic API key secure",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

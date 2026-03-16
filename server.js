@@ -153,6 +153,13 @@ const server=http.createServer(async(req,res)=>{
       saveData(DB);return jsend(res,200,{success:true},o);
     }
 
+    // HEALTH CHECK — for keep-alive pings (no API cost)
+    if(req.method==='GET'&&url==='/health'){
+      res.writeHead(200,{...corsH(o),'Content-Type':'application/json'});
+      res.end(JSON.stringify({status:'ok',timestamp:new Date().toISOString()}));
+      return;
+    }
+
     jsend(res,404,{error:'Not found'},o);
   }catch(err){console.error('Error:',err.message);jsend(res,500,{error:'Internal server error'},o);}
 });

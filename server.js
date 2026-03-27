@@ -33,7 +33,7 @@ const server=http.createServer(async(req,res)=>{
     if(req.method==='POST'&&url==='/v1/messages'){
       const b=await getBody(req);
       b.model='claude-haiku-4-5-20251001';
-      if(!b.max_tokens||b.max_tokens>4000)b.max_tokens=4000;
+      if(!b.max_tokens||b.max_tokens>8000)b.max_tokens=8000;
       const pl=JSON.stringify(b);
       const pr=https.request({hostname:'api.anthropic.com',path:'/v1/messages',method:'POST',headers:{'Content-Type':'application/json','Content-Length':Buffer.byteLength(pl),'anthropic-version':'2023-06-01','x-api-key':API_KEY}},pr2=>{
         let d='';pr2.on('data',c=>{d+=c;});pr2.on('end',()=>{res.writeHead(pr2.statusCode,{...corsH(o),'Content-Type':'application/json'});res.end(d);});
